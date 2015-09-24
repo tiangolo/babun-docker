@@ -38,14 +38,11 @@ function docker {
  if [[ $result == "cannot enable tty mode on non tty input" ]] ; then
    echo "babun-docker: Using winpty"
    console $docker_bin $@
- elif [[ $result == *"ConnectEx tcp: No connection could be made"* ]] ; then
+ elif [[ $result == *"ConnectEx tcp"* ]] ; then
+   echo "babun-docker: Trying to start docker-machine default"
+   docker-machine start default
    echo "babun-docker: Setting up docker-machine environment"
    eval "$(docker-machine env default --shell zsh)"
-   docker $@
- elif [[ $result == *"ConnectEx tcp: A connection attempt failed"* ]] ; then
-   echo "babun-docker: Starting docker-machine default"
-   docker-machine start default
-   # eval "$(docker-machine env default --shell zsh)"
    docker $@
  else
    echo $result ;
