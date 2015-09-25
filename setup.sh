@@ -34,7 +34,7 @@ if [[ -z "$docker_bin" ]] then ;
   docker_bin=$(which docker) ;
 fi
 function docker {
- result="$($docker_bin $@ 2>&1)"
+ result="$($docker_bin $@ > >(tee /dev/tty) 2> >(tee /dev/tty >&2) | 2>&1)"
  if [[ $result == "cannot enable tty mode on non tty input" ]] ; then
    echo "babun-docker: Using winpty"
    console $docker_bin $@
@@ -44,8 +44,6 @@ function docker {
    echo "babun-docker: Setting up docker-machine environment"
    eval "$(docker-machine env default --shell zsh)"
    docker $@
- else
-   echo $result ;
  fi
 }
 BABUN_DOCKER_SETUP=1
