@@ -25,6 +25,14 @@ Note: the previous command will get a script from this repository and run it imm
 steps to install everything (the same steps described in "Manual installation").
 If you don't want to run it, you can do a manual installation.
 
+----
+## Docker Volumes with Babun
+If you want to set up Docker Volumes with Babun, to allow using commands like:
+```
+docker run -it -v $(pwd):/var/www ubuntu bash
+```
+Read this Wiki entry: [Docker Volumes with Babun](https://github.com/tiangolo/babun-docker/wiki/Docker-Volumes-with-Babun).
+
 -----
 
 ## Manual installation
