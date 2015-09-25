@@ -34,7 +34,7 @@ if [[ -z "$docker_bin" ]] then ;
   docker_bin=$(which docker) ;
 fi
 function docker {
- result="$($docker_bin $@ > >(tee /dev/tty) 2> >(tee /dev/tty >&2) | 2>&1)"
+ result="$($docker_bin $@ > >(tee /dev/tty) 2>&1)"
  if [[ $result == "cannot enable tty mode on non tty input" ]] ; then
    echo "babun-docker: Using winpty"
    console $docker_bin $@
