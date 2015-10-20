@@ -27,7 +27,7 @@ if [[ -z $BABUN_DOCKER_SETUP ]] ; then
   chmod 777 $WINPTY_DIR/*
   # Add winpty to the PATH
   echo '# Add Winpty fix for Docker' >> ~/.zshrc
-  echo 'PATH=$PATH:'$WINPTY_DIR >> ~/.zshrc
+  echo 'PATH=$PATH:'\"$WINPTY_DIR\" >> ~/.zshrc
   echo '
 # Fix for Docker and Docker Toolbox in Babun
 if [[ -z "$docker_bin" ]] then ;
