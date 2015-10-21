@@ -11,7 +11,7 @@ babun_docker_repo='https://github.com/tiangolo/babun-docker.git'
 babun_docker_OLD_PWD=$(pwd)
 # Set up winpty
 # Where to download winpty from
-babun_docker_WINPTY_URL="$WINPTY_BASE_URL$WINPTY_FILENAME"
+babun_docker_WINPTY_URL="$babun_docker_WINPTY_BASE_URL$babun_docker_WINPTY_FILENAME"
 # Directory in where to put Winpty
 babun_docker_WINPTY_DIR="$HOME/.winpty"
 # Create a local .winpty directory under your home
