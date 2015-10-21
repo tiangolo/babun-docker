@@ -2,11 +2,11 @@
 
 ## Description
 
-Workaround and quick fix to allow using [Docker Tooblox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/).
+Workaround / fix to allow using [Docker Tooblox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/).
 
 It could work for Cygwin with some little modifications, but if you are using Cygwin, you should be using Babun. It's an improved Cygwin.
 
-This quick fix installs [winpty](https://github.com/rprichard/winpty), sets the environment variables and creates a function to embed ```docker```, and to allow non-tty connections.
+This program installs [winpty](https://github.com/rprichard/winpty), sets the environment variables and creates a function to embed ```docker```, and to allow non-tty connections.
 
 It also checks if the default docker-machine is running, if not, it tries to start it and set the environment to use it.
 
@@ -21,7 +21,7 @@ After using this, you don't have to "use" another program. You can keep using th
 curl -s https://raw.githubusercontent.com/tiangolo/babun-docker/master/setup.sh | source /dev/stdin
 ```
 
-Note: the previous command will get a script from this repository and run it immediately, performing all the needed
+**Note**: the previous command will get a script from this repository and run it immediately, performing all the needed
 steps to install everything (the same steps described in "Manual installation").
 If you don't want to run it, you can do a manual installation.
 
@@ -74,7 +74,7 @@ The setup will:
 * Download and install Winpty to allow using Docker commands that enter a container
 * Create a command (function) to update **babun-docker**, with ```babun-docker-update```
 * Add itself to the ```~/.zshrc``` file to run at startup
-* Run (```source```) the script to fix Docker wrapping it.
+* Run (```source```) the script to fix Docker, wrapping it
 
 The wrapper script (function) will try to call docker, if it fails, it will check what was the failure, try to fix it and run again.
 
