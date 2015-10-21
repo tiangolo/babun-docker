@@ -25,6 +25,14 @@ Note: the previous command will get a script from this repository and run it imm
 steps to install everything (the same steps described in "Manual installation").
 If you don't want to run it, you can do a manual installation.
 
+## Updating
+
+* To update **babun-docker**, after following the installation instructions, run the command:
+
+```
+babun-docker-update
+```
+
 ----
 ## Docker Volumes with Babun
 If you want to set up Docker Volumes with Babun, to allow using commands like:
@@ -43,72 +51,34 @@ Read this Wiki entry: [Docker Volumes with Babun](https://github.com/tiangolo/ba
 cd
 ```
 
-* Create a directory to store winpty:
+* clone this repo in the specific directory, like:
 
 ```
-mkdir ~/.winpty
+git clone https://github.com/tiangolo/babun-docker.git ./.babun-docker
 ```
 
 * Enter that directory:
 
 ```
-cd ~/.winpty
+cd ./.babun-docker
 ```
 
-* Download winpty for Cygwin:
+* Source the setup:
 
 ```
-wget https://github.com/downloads/rprichard/winpty/winpty-0.1.1-cygwin.zip
+source ./setup.sh
 ```
 
-* Unzip it there:
+The setup will:
 
-```
-unzip winpty-0.1.1-cygwin.zip
-```
+* Download and install Winpty to allow using Docker commands that enter a container
+* Create a command (function) to update **babun-docker**, with ```babun-docker-update```
+* Add itself to the ```~/.zshrc``` file to run at startup
+* Run (```source```) the script to fix Docker wrapping it.
 
-* Add execution permissions:
+The wrapper script (function) will try to call docker, if it fails, it will check what was the failure, try to fix it and run again.
 
-```
-chmod 777 ~/.winpty
-```
-
-* Add winpty to the PATH variable:
-
-```
-echo 'PATH=$PATH:'$WINPTY_DIR >> ~/.zshrc
-```
-
-* Add the workaround function to your .zshrc:
-
-```
-echo '
-# Fix for Docker and Docker Toolbox in Babun
-if [[ -z "$docker_bin" ]] then ;
-docker_bin=$(which docker) ;
-fi
-function docker {
-result="$($docker_bin $@ 2>&1)"
-if [[ $result == "cannot enable tty mode on non tty input" ]] ; then
- echo "babun-docker: Using winpty"
- console $docker_bin $@
-elif [[ $result == *"ConnectEx tcp"* ]] ; then
- echo "babun-docker: Trying to start docker-machine default"
- docker-machine start default
- echo "babun-docker: Setting up docker-machine environment"
- eval "$(docker-machine env default --shell zsh)"
- docker $@
-else
- echo $result ;
-fi
-}
-BABUN_DOCKER_SETUP=1
-' >> ~/.zshrc
-```
-
-The function will try to call docker, if it fails, it will check what was the failure, try to fix it and run again.
-
-It will:
+The wrapper / fix will:
 
 * auto-start the default docker machine
 * set the environment variables for that default docker-machine
