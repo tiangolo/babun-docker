@@ -16,23 +16,40 @@ function docker {
     if [[ $line == "cannot enable tty mode on non tty input" ]] ; then
       babun_docker_use_winpty=1
     elif [[ $line == *"ConnectEx tcp"* ]] ; then
+      # Set up shared folders in VirtualBox
+      if [[ $babun_docker_setup_volumes == 1 ]] ; then
+        IFS=$babun_docker_old_IFS
+        if [[ -f $babun_docker_virtualbox_path ]] ; then
+          babun_docker_virtualbox_bin=$(cygpath -u $babun_docker_virtualbox_path)
+          for drive in $(ls /cygdrive); do
+            windows_drive=$(cygpath -d /cygdrive/$drive)
+            if [[ -z $($babun_docker_virtualbox_bin showvminfo $babun_docker_machine_name | grep "Name: '$drive'") ]] ; then
+              echo "$babun_docker_feedback Setting VirtualBox shared folder for drive $drive"
+              $babun_docker_virtualbox_bin sharedfolder add $babun_docker_machine_name --name $drive --hostpath $windows_drive --automount
+            else
+              echo "$babun_docker_feedback VirtualBox shared folder for drive $drive were arealdy set"
+            fi
+          done
+        fi
+        IFS=''
+      fi;
       # Start docker-machine
-      echo "$babun_docker_feedback Trying to start docker-machine default"
-      docker-machine start default
+      echo "$babun_docker_feedback Trying to start docker-machine $babun_docker_machine_name"
+      docker-machine start $babun_docker_machine_name
       # Set up volumes
       if [[ $babun_docker_setup_volumes == 1 ]] ; then
         IFS=$babun_docker_old_IFS
         for drive in $(ls /cygdrive); do
           echo "$babun_docker_feedback Volumes, creating directory for drive: $drive"
-          docker-machine ssh default "sudo mkdir -p /cygdrive/$drive/"
+          docker-machine ssh $babun_docker_machine_name "sudo mkdir -p /cygdrive/$drive/"
           echo "$babun_docker_feedback Volumes, mounting drive: $drive"
-          docker-machine ssh default "sudo mount -t vboxsf $drive /cygdrive/$drive/"
+          docker-machine ssh $babun_docker_machine_name "sudo mount -t vboxsf $drive /cygdrive/$drive/"
         done
         IFS=''
       fi;
       # Set up environment
       echo "$babun_docker_feedback Setting up docker-machine environment"
-      eval "$(docker-machine env default --shell zsh)"
+      eval "$(docker-machine env $babun_docker_machine_name --shell zsh)"
       babun_docker_run_again=1
     fi;
  done
