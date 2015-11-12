@@ -2,7 +2,7 @@
 # Set variables
 
 # Should babun-docker setup volumes?
-babun_docker_setup_volumes=0
+babun_docker_setup_volumes=1
 
 # winpty base URL
 babun_docker_WINPTY_BASE_URL="https://github.com/downloads/rprichard/winpty/"
