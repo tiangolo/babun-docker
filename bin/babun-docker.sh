@@ -16,19 +16,31 @@ function docker {
     if [[ $line == "cannot enable tty mode on non tty input" ]] ; then
       babun_docker_use_winpty=1
     elif [[ $line == *"ConnectEx tcp"* ]] ; then
-      echo "babun-docker: Trying to start docker-machine default"
+      echo "$babun_docker_feedback Trying to start docker-machine default"
       docker-machine start default
-      echo "babun-docker: Setting up docker-machine environment"
+
+      if [[ $babun_docker_setup_volumes == 1 ]] ; then
+        IFS=$babun_docker_old_IFS
+        for drive in $(ls /cygdrive); do
+          echo "$babun_docker_feedback Volumes, creating directory for drive: $drive"
+          docker-machine ssh default "sudo mkdir -p /cygdrive/$drive/"
+          echo "$babun_docker_feedback Volumes, mounting drive: $drive"
+          docker-machine ssh default "sudo mount -t vboxsf $drive /cygdrive/$drive/"
+        done
+        IFS=''
+      fi;
+
+      echo "$babun_docker_feedback Setting up docker-machine environment"
       eval "$(docker-machine env default --shell zsh)"
       babun_docker_run_again=1
     fi;
  done
  if [[ $babun_docker_use_winpty == 1 ]] ; then
-   echo "babun-docker: Using winpty"
+   echo "$babun_docker_feedback Using winpty"
    console $docker_bin $@
 
  elif [[ $babun_docker_run_again == 1 ]] ; then
-   echo "babun-docker: Running command again"
+   echo "$babun_docker_feedback Running command again"
    docker $@
  fi
  IFS=$babun_docker_old_IFS

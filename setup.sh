@@ -1,5 +1,9 @@
 #! /bin/bash
 # Set variables
+
+# Should babun-docker setup volumes?
+babun_docker_setup_volumes=1
+
 # winpty base URL
 babun_docker_WINPTY_BASE_URL="https://github.com/downloads/rprichard/winpty/"
 # Specific file name, separated to allow unzipping it later
@@ -7,6 +11,9 @@ babun_docker_WINPTY_FILENAME="winpty-0.1.1-cygwin.zip"
 
 # babun-docker repo
 babun_docker_repo='https://github.com/tiangolo/babun-docker.git'
+
+# feedback format string
+babun_docker_feedback='-- babun-docker:'
 
 babun_docker_OLD_PWD=$(pwd)
 # Set up winpty
@@ -50,7 +57,7 @@ fi
 # Setup update
 function babun-docker-update {
   babun_docker_update_old_pwd=$(pwd)
-  echo "babun-docker: Updating babun-docker"
+  echo "$babun_docker_feedback Updating babun-docker"
   cd $babun_docker_repo_dir
   git pull
   source ./setup.sh
