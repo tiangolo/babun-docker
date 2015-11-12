@@ -4,6 +4,9 @@
 # Should babun-docker setup volumes?
 babun_docker_setup_volumes=1
 
+# docker-machine name
+babun_docker_machine_name="default"
+
 # winpty base URL
 babun_docker_WINPTY_BASE_URL="https://github.com/downloads/rprichard/winpty/"
 # Specific file name, separated to allow unzipping it later
@@ -17,9 +20,6 @@ babun_docker_feedback='-- babun-docker:'
 
 # VirtualBox path
 babun_docker_virtualbox_path="C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage"
-
-# docker-machine name
-babun_docker_machine_name="default"
 
 babun_docker_OLD_PWD=$(pwd)
 # Set up winpty
