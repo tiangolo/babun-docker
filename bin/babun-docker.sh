@@ -27,7 +27,7 @@ function docker {
               echo "$babun_docker_feedback Setting VirtualBox shared folder for drive $drive"
               $babun_docker_virtualbox_bin sharedfolder add $babun_docker_machine_name --name $drive --hostpath $windows_drive --automount
             else
-              echo "$babun_docker_feedback VirtualBox shared folder for drive $drive were arealdy set"
+              echo "$babun_docker_feedback VirtualBox shared folder for drive $drive was arealdy set"
             fi
           done
         fi
