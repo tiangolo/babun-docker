@@ -43,6 +43,9 @@ babun-docker-update
 
 ## What's new
 
+#### 2016-03-16: 
+* Support for Docker v1.10 (see PR #9 by @mrkschan ).
+
 #### 2015-11-12:
 * **babun-docker** automatically sets up shared folders in your VirtualBox virtual machine (docker-machine) for each of your Windows drives and mounts them inside the virtual machine, to allow using volumes (from any drive in your Windows, which is even more than what comes by default with the Docker Toolbox) with commands like:
 
