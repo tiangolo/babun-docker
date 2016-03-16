@@ -2,7 +2,7 @@
 
 ## Description
 
-Workaround / fix to allow using [Docker Toolbox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/).
+Workaround / fix to allow using [Docker Toolbox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/) in Windows.
 
 It could work for Cygwin with some little modifications, but if you are using Cygwin, you should be using Babun. It's an improved Cygwin.
 
