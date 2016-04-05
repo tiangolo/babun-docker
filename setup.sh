@@ -56,7 +56,7 @@ source 'bin/babun-docker.sh'
 
 # Set up setup on start
 babun_docker_setup_str="source '$babun_docker_repo_dir/setup.sh'"
-if [[ -z $(grep $babun_docker_setup_str $HOME/.zshrc) ]] ; then
+if [[ -z $(grep "$babun_docker_setup_str" $HOME/.zshrc) ]] ; then
   echo $babun_docker_setup_str >> $HOME/.zshrc ;
 fi
 
