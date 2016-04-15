@@ -1,11 +1,4 @@
 #! /bin/bash
-# Set variables
-
-# Should babun-docker setup volumes?
-babun_docker_setup_volumes=1
-
-# docker-machine name
-babun_docker_machine_name="default"
 
 # winpty base URL
 babun_docker_WINPTY_BASE_URL="https://github.com/downloads/rprichard/winpty/"
@@ -51,6 +44,7 @@ if [[ ! -d $babun_docker_repo_dir ]] ; then
    git clone $babun_docker_repo $babun_docker_repo_dir
 fi
 cd $babun_docker_repo_dir
+source ./*config.sh
 source 'bin/babun-docker.sh'
 
 
