@@ -46,7 +46,8 @@ function docker {
           echo "$babun_docker_feedback Volumes, creating directory for drive: $drive"
           docker-machine ssh $babun_docker_machine_name "sudo mkdir -p /cygdrive/$drive/"
           echo "$babun_docker_feedback Volumes, mounting drive: $drive"
-          docker-machine ssh $babun_docker_machine_name "sudo mount -t vboxsf $drive /cygdrive/$drive/"
+          #docker-machine ssh $babun_docker_machine_name "sudo mount -t vboxsf $drive /cygdrive/$drive/"
+          docker-machine ssh $babun_docker_machine_name 'sudo mount -t vboxsf -o "defaults,uid=`id -u docker`,gid=`id -g docker`,iocharset=utf8,rw"' "$drive /cygdrive/$drive/"
         done
         IFS=''
       fi;
