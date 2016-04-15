@@ -55,6 +55,8 @@ docker-machine stop $babun_docker_machine_name
 
 * You can use a separate file in `~/.babun-docker/custom-config.sh` for custom configurations. Read more in the **Configurations** section below.
 
+* Improved mounted volumes and ownership (with hints by @olegweb ).
+
 #### 2016-03-16:
 * Support for Docker v1.10 (see PR #9 by @mrkschan ).
 
