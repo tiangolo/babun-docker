@@ -8,6 +8,9 @@ function docker {
   if [[ -z ${babun_docker_old_IFS+x} ]] ; then
     babun_docker_old_IFS=$IFS
   fi
+  if [[ -z ${babun_docker_volumes+x} ]] ; then
+    babun_docker_volumes=$(ls /cygdrive);
+  fi
  IFS=''
  babun_docker_use_winpty=0
  babun_docker_run_again=0
@@ -21,7 +24,7 @@ function docker {
         IFS=$babun_docker_old_IFS
         if [[ -f $babun_docker_virtualbox_path ]] ; then
           babun_docker_virtualbox_bin=$(cygpath -u $babun_docker_virtualbox_path)
-          for drive in $(ls /cygdrive); do
+          for drive in $(echo $babun_docker_volumes | tr '\n' ' ') ; do
             windows_drive=$(cygpath -d /cygdrive/$drive)
             if [[ -z $($babun_docker_virtualbox_bin showvminfo $babun_docker_machine_name | grep "Name: '$drive'") ]] ; then
               echo "$babun_docker_feedback Setting VirtualBox shared folder for drive $drive"
