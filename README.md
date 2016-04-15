@@ -39,11 +39,23 @@ If you don't want to run it, you can do a manual installation.
 babun-docker-update
 ```
 
+## Turning off
+* As Docker Toolbox runs in a virtual machine, it uses `docker-machine` to comunicate and configure it. If you want to turn the virtual machine off, run:
+
+```
+docker-machine stop $babun_docker_machine_name
+```
+
 ----
 
 ## What's new
 
-#### 2016-03-16: 
+#### 2016-04-14:
+* You can define which specific Windows drives to mount with the variable `babun_docker_volumes` (by default **babun-docker** tries to mounth them all). Read more in the **Configurations** section below.
+
+* You can use a separate file in `~/.babun-docker/custom-config.sh` for custom configurations. Read more in the **Configurations** section below.
+
+#### 2016-03-16:
 * Support for Docker v1.10 (see PR #9 by @mrkschan ).
 
 #### 2015-11-12:
@@ -53,9 +65,9 @@ babun-docker-update
 docker run -it -v $(pwd):/var/www debian bash
 ```
 
-* You can configure if you want **babun-docker** to automatically set up VirtualBox shared folders and volumes with the environment variable ```babun_docker_setup_volumes```. Set it to "0" if you want to disable that.
+* You can configure if you want **babun-docker** to automatically set up VirtualBox shared folders and volumes with the environment variable ```babun_docker_setup_volumes```. Set it to "0" if you want to disable that. Read more in the **Configurations** section below.
 
-* You can now specify the name of the docker-machine to use with the environment variable ```babun_docker_machine_name```, which is set by default to the "default" machine (named "default"). (No pun / tongue twister intended). Set that environment variable to the name of the machine that you want to use (e.g. ```babun_docker_machine_name='dev'```).
+* You can now specify the name of the docker-machine to use with the environment variable ```babun_docker_machine_name```, which is set by default to the "default" machine (named "default"). (No pun / tongue twister intended). Set that environment variable to the name of the machine that you want to use (e.g. ```babun_docker_machine_name='dev'```). Read more in the **Configurations** section below.
 
 #### 2015-10-21:
 * The installation of **babun-docker** clones the repository and sets up the environment to use the scripts inside it instead of writing it all to the ```~/.zshrc``` file.
@@ -128,18 +140,25 @@ docker exec -it my_container bash
 
 ## Configurations
 
-After installing **babun-docker**, you can configure things with environment variables.
+After installing **babun-docker**, you can configure things with environment variables in the file `~/.babun-docker/custom-config.sh`.
+
+* If you want to specify which drives should be used for the setup of VirtualBox shared folders and volumes inside your docker-machine virtual machine set the environment variable ```babun_docker_volumes``` to a list of the drive names separated by spaces, as in "c d". For example:
+
+```
+echo 'babun_docker_volumes="c d"' >> ~/.babun-docker/custom-config.sh
+source ~/.babun-docker/*config.sh
+```
 
 * If you want to disable the setup of VirtualBox shared folders and volumes inside your docker-machine virtual machine set the environment variable ```babun_docker_setup_volumes``` to "0". For example:
 
 ```
-echo babun_docker_setup_volumes=0 >> ~/.zshrc
-source ~/.zshrc
+echo babun_docker_setup_volumes=0 >> ~/.babun-docker/custom-config.sh
+source ~/.babun-docker/*config.sh
 ```
 
 * If you want to change the virtual machine to use (if you have configured another virtual machine with ```docker-machine```) you can set the environment variable ```babun_docker_machine_name``` to the name of your new virtual machine. For example:
 
 ```
-echo babun_docker_machine_name='dev' >> ~/.zshrc
-source ~/.zshrc
+echo babun_docker_machine_name='dev' >> ~/.babun-docker/custom-config.sh
+source ~/.babun-docker/*config.sh
 ```
