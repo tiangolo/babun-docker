@@ -50,6 +50,9 @@ docker-machine stop $babun_docker_machine_name
 
 ## What's new
 
+#### 2016-04-19:
+* You can configure the VirtualBox installation path with the variable `babun_docker_virtualbox_bin`. Read more in the **Configurations** section below.
+
 #### 2016-04-14:
 * You can define which specific Windows drives to mount with the variable `babun_docker_volumes` (by default **babun-docker** tries to mounth them all). Read more in the **Configurations** section below.
 
@@ -162,5 +165,12 @@ source ~/.babun-docker/*config.sh
 
 ```
 echo babun_docker_machine_name='dev' >> ~/.babun-docker/custom-config.sh
+source ~/.babun-docker/*config.sh
+```
+
+* If you have VirtualBox installed in a different location (it would be uncommon) you could set the path with the variable ```babun_docker_virtualbox_bin```, you would have to use Cygwin (Babun) paths, you can use cygpath to convert between Windows and Cygwin paths. It should point to the program "VBoxManage". For example:
+
+```
+echo "babun_docker_virtualbox_bin='$(cygpath -u 'C:\Program Files\Oracle\VirtualBox\VBoxManage')'" >> ~/.babun-docker/custom-config.sh
 source ~/.babun-docker/*config.sh
 ```
