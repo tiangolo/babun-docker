@@ -11,9 +11,6 @@ babun_docker_repo='https://github.com/tiangolo/babun-docker.git'
 # feedback format string
 babun_docker_feedback='-- babun-docker:'
 
-# VirtualBox path
-babun_docker_virtualbox_path="C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage"
-
 babun_docker_OLD_PWD=$(pwd)
 # Set up winpty
 # Where to download winpty from
