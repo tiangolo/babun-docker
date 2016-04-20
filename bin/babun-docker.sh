@@ -18,6 +18,7 @@ function docker {
    echo $line
     if [[ $line == "cannot enable tty mode on non tty input" ]] ; then
       babun_docker_use_winpty=1
+      echo "export babun_docker_use_winpty=1" >> $babun_docker_env_vars_file
     elif [[ $line == *"ConnectEx tcp"* || $line == *"connectex"* || $line == *"//./pipe/docker_engine: The system cannot find the file specified."* ]] ; then
       # Set up shared folders in VirtualBox
       if [[ $babun_docker_setup_volumes == 1 ]] ; then
@@ -53,9 +54,17 @@ function docker {
       # Set up environment
       echo "$babun_docker_feedback Setting up docker-machine environment"
       eval "$(docker-machine env $babun_docker_machine_name --shell bash)"
+      echo "$(docker-machine env $babun_docker_machine_name --shell bash)" >> $babun_docker_env_vars_file
       babun_docker_run_again=1
+      echo "export babun_docker_run_again=1" >> $babun_docker_env_vars_file
     fi;
  done
+ # (Fix for Bash) check if a variables file was created and source it
+ if [[ -f $babun_docker_env_vars_file ]] ; then
+   source $babun_docker_env_vars_file
+   rm $babun_docker_env_vars_file
+ fi
+
  if [[ $babun_docker_use_winpty == 1 ]] ; then
    # Run commands with winpty
    echo "$babun_docker_feedback Using winpty"

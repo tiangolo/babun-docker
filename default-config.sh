@@ -10,3 +10,6 @@ babun_docker_machine_name="default"
 # VirtualBox path
 # C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage
 babun_docker_virtualbox_bin="/cygdrive/c/Program Files/Oracle/VirtualBox/VBoxManage"
+
+# Docker env variables
+babun_docker_env_vars_file="/tmp/babun-docker-env-vars"
