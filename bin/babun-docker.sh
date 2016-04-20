@@ -22,12 +22,12 @@ function docker {
       # Set up shared folders in VirtualBox
       if [[ $babun_docker_setup_volumes == 1 ]] ; then
         IFS=$babun_docker_old_IFS
-        if [[ -f $babun_docker_virtualbox_bin ]] ; then
+        if [[ -f "$babun_docker_virtualbox_bin" ]] ; then
           for drive in $(echo $babun_docker_volumes | tr '\n' ' ') ; do
             windows_drive=$(cygpath -d /cygdrive/$drive)
-            if [[ -z $($babun_docker_virtualbox_bin showvminfo $babun_docker_machine_name | grep "Name: '$drive'") ]] ; then
+            if [[ -z $("$babun_docker_virtualbox_bin" showvminfo $babun_docker_machine_name | grep "Name: '$drive'") ]] ; then
               echo "$babun_docker_feedback Setting VirtualBox shared folder for drive $drive"
-              $babun_docker_virtualbox_bin sharedfolder add $babun_docker_machine_name --name $drive --hostpath $windows_drive --automount
+              "$babun_docker_virtualbox_bin" sharedfolder add $babun_docker_machine_name --name $drive --hostpath $windows_drive --automount
             else
               echo "$babun_docker_feedback VirtualBox shared folder for drive $drive was already set"
             fi
