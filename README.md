@@ -64,8 +64,12 @@ docker-machine stop $babun_docker_machine_name
 
 ## What's new
 
+#### 2016-04-21:
+* Now you can run **babun-docker** in **Cygwin** (but I still recommend **Babun**).
+
 #### 2016-04-20:
 * Update winpty to latest version (and make old winpty installs to auto-update).
+* Now you can use Bash instead of Zsh.
 
 #### 2016-04-19:
 * You can configure the VirtualBox installation path with the variable `babun_docker_virtualbox_bin`. Read more in the **Configurations** section below.
