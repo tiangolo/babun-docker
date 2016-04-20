@@ -2,15 +2,15 @@
 
 ## Description
 
-Workaround / fix to allow using [Docker Toolbox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/) in Windows.
+Workaround / fix to allow using [Docker Toolbox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/) or Cygwin in Windows.
 
-It could work for Cygwin with some little modifications, but if you are using Cygwin, you should be using Babun. It's an improved Cygwin.
+If you are using Cygwin, you should be using Babun. It's an improved Cygwin. Nevertheless, the latest versions of **babun-docker** work in Cygwin too.
 
 This program installs [winpty](https://github.com/rprichard/winpty), sets the environment variables and creates a function to embed ```docker```, and to allow non-tty connections.
 
 It also checks if the default docker-machine is running, if not, it tries to start it and set the environment to use it.
 
-And it also sets up shared folders in VirtualBox for each drive in your Windows and mounts them inside the virtual machine (docker-machine), to allow using volumes with Docker (from any drive in your Windows, which is even more than what comes by default with the Docker Toolbox) to allow using commands like:
+And it also sets up shared folders in VirtualBox for each drive in your Windows (although you can configure which drives to use if you want) and mounts them inside the virtual machine (docker-machine), to allow using volumes with Docker (from any drive in your Windows, which is even more than what comes by default with the Docker Toolbox) to allow using commands like:
 
 ```
 docker run -d -v $(pwd):/var/www ubuntu ping google.com
@@ -30,6 +30,20 @@ curl -s https://raw.githubusercontent.com/tiangolo/babun-docker/master/setup.sh 
 **Note**: the previous command will get a script from this repository and run it immediately, performing all the needed
 steps to install everything (the same steps described in "Manual installation").
 If you don't want to run it, you can do a manual installation.
+
+### Installing **docker-babun** in Cygwin
+
+If you definitively don't want to use **Babun**, you can install **docker-babun** in **Cygwin** (nevertheless, I highly recommend you **Babun**).
+
+First you will need to have installed the following packages (installed by default in **Babun**):
+
+* curl
+* wget
+* git
+
+Then you can run the same command as above.
+
+
 
 ## Updating
 
