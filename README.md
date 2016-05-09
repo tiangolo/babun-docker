@@ -2,13 +2,17 @@
 
 ## Description
 
-Workaround / fix to allow using [Docker Toolbox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/) or Cygwin in Windows.
+Program / fix to allow using [Docker Toolbox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/) or Cygwin in Windows.
 
 If you are using Cygwin, you should be using Babun. It's an improved Cygwin. Nevertheless, the latest versions of **babun-docker** work in Cygwin too.
 
 This program installs [winpty](https://github.com/rprichard/winpty), sets the environment variables and creates a function to embed ```docker```, and to allow non-tty connections.
 
-It also checks if the default docker-machine is running, if not, it tries to start it and set the environment to use it.
+This allows running commands that "enter" in the container, as for example those that use `-it` and end in `bash`:
+
+```docker run -it -v $(pwd):/var/www debian bash```
+
+It also checks if the default docker-machine (the Virtual Machine) is running, if not, it tries to start it and set the environment to use it.
 
 And it also sets up shared folders in VirtualBox for each drive in your Windows (although you can configure which drives to use if you want) and mounts them inside the virtual machine (docker-machine), to allow using volumes with Docker (from any drive in your Windows, which is even more than what comes by default with the Docker Toolbox) to allow using commands like:
 
@@ -20,6 +24,9 @@ docker run -d -v $(pwd):/var/www ubuntu ping google.com
 
 ## Installation
 
+* Install [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
+* Run the bundled Docker Quickstart Terminal that comes with Docker Toolbox to make sure everything is working.
+* Turn off the Docker Toolbox Virtual Machine: run `docker-machine stop default` (or turn off the Virtual Machine `default` in VirtualBox) so that **babun-docker** can do all the needed automatic configurations with the VM turned off.
 * Install [Babun](http://babun.github.io/) and start a terminal.
 * Run the following command:
 
@@ -27,7 +34,11 @@ docker run -d -v $(pwd):/var/www ubuntu ping google.com
 curl -s https://raw.githubusercontent.com/tiangolo/babun-docker/master/setup.sh | source /dev/stdin
 ```
 
-**Note**: the previous command will get a script from this repository and run it immediately, performing all the needed
+* From Babun, use Docker as you would normally, for example: `docker ps`. 
+
+It will take care of configuring the virtual machine, turning it on, sharing volumes, allowing non-tty commands, etc. Whenever it does something for you (automatically) you will see an output like: `-- babun-docker: doing something`.
+
+**Note**: the installation command will get a script from this repository and run it immediately, performing all the needed
 steps to install everything (the same steps described in "Manual installation").
 If you don't want to run it, you can do a manual installation.
 
