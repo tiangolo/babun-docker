@@ -55,6 +55,7 @@ function docker {
       echo "$babun_docker_feedback Setting up docker-machine environment"
       eval "$(docker-machine env $babun_docker_machine_name --shell bash)"
       echo "$(docker-machine env $babun_docker_machine_name --shell bash)" >> $babun_docker_env_vars_file
+      sed -i 's|\\|/|g' $babun_docker_env_vars_file
       babun_docker_run_again=1
       echo "export babun_docker_run_again=1" >> $babun_docker_env_vars_file
     fi;
