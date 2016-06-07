@@ -48,7 +48,7 @@ if [[ ! -f $babun_docker_winpty_filename ]] ; then
    # Make console executable
    chmod 777 $babun_docker_winpty_dir/*
 fi
-export PATH=$PATH:$babun_docker_winpty_dir
+export PATH="$PATH:$babun_docker_winpty_dir"
 
 
 # Set up babun-docker
