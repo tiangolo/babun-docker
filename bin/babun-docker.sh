@@ -19,7 +19,7 @@ function docker {
     if [[ $line == "cannot enable tty mode on non tty input" ]] ; then
       babun_docker_use_winpty=1
       echo "export babun_docker_use_winpty=1" >> $babun_docker_env_vars_file
-    elif [[ $line == *"ConnectEx tcp"* || $line == *"connectex"* || $line == *"//./pipe/docker_engine: The system cannot find the file specified."* ]] ; then
+    elif [[ $line == *"ConnectEx tcp"* || $line == *"connectex"* || $line == *"//./pipe/docker_engine:"* ]] ; then
       # Set up shared folders in VirtualBox
       if [[ $babun_docker_setup_volumes == 1 ]] ; then
         IFS=$babun_docker_old_IFS
