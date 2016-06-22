@@ -75,6 +75,9 @@ docker-machine stop $babun_docker_machine_name
 
 ## What's new
 
+#### 2016-06-22:
+* Fix for Docker Beta for Windows, see PR [#21](https://github.com/tiangolo/babun-docker/pull/21) by [@ronnypolley](https://github.com/ronnypolley).
+
 #### 2016-04-21:
 * Now you can run **babun-docker** in **Cygwin** (but I still recommend **Babun**).
 
@@ -90,10 +93,10 @@ docker-machine stop $babun_docker_machine_name
 
 * You can use a separate file in `~/.babun-docker/custom-config.sh` for custom configurations. Read more in the **Configurations** section below.
 
-* Improved mounted volumes and ownership (with hints by @olegweb ).
+* Improved mounted volumes and ownership (with hints by [@olegweb](https://github.com/olegweb) ).
 
 #### 2016-03-16:
-* Support for Docker v1.10 (see PR #9 by @mrkschan ).
+* Support for Docker v1.10 (see PR [#9](https://github.com/tiangolo/babun-docker/pull/9) by [@mrkschan](https://github.com/mrkschan) ).
 
 #### 2015-11-12:
 * **babun-docker** automatically sets up shared folders in your VirtualBox virtual machine (docker-machine) for each of your Windows drives and mounts them inside the virtual machine, to allow using volumes (from any drive in your Windows, which is even more than what comes by default with the Docker Toolbox) with commands like:
