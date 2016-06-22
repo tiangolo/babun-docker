@@ -64,6 +64,8 @@ Then you can run the same command as above.
 babun-docker-update
 ```
 
+Note: if you want to receive email notifications when **babun-docker** is updated you can "star" this repository (the star button above) and login with GitHub to [Sibbell](https://sibbell.com), it will send you notifications automatically with new releases.
+
 ## Turning off
 * As Docker Toolbox runs in a virtual machine, it uses `docker-machine` to comunicate and configure it. If you want to turn the virtual machine off, run:
 
