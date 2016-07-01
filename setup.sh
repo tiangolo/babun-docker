@@ -38,7 +38,7 @@ if [[ ! -f $babun_docker_winpty_filename ]] ; then
    mkdir -p $babun_docker_winpty_dir
    cd $babun_docker_winpty_dir
    # Download winpty
-   wget $babun_docker_winpty_url
+   wget $babun_docker_winpty_url -O $babun_docker_winpty_filename
    # Untar the downloaded file
    tar xf $babun_docker_winpty_filename
    # Move the tar contents to the current directory
