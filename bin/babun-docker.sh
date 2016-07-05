@@ -69,7 +69,7 @@ function docker {
  if [[ $babun_docker_use_winpty == 1 ]] ; then
    # Run commands with winpty
    echo "$babun_docker_feedback Using winpty"
-   console $docker_bin $@
+   winpty $docker_bin $@
  elif [[ $babun_docker_run_again == 1 ]] ; then
    # Run commands again after setup
    echo "$babun_docker_feedback Running command again"

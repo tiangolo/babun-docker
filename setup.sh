@@ -1,11 +1,11 @@
 #! /bin/bash
 
 # winpty base URL
-babun_docker_winpty_base_url="https://github.com/rprichard/winpty/releases/download/0.2.2/"
+babun_docker_winpty_base_url="https://github.com/rprichard/winpty/releases/download/0.4.0/"
 
 
 # Specific file name, separated to allow unzipping it later
-babun_docker_winpty_only_name="winpty-0.2.2-cygwin-2.4.1-ia32"
+babun_docker_winpty_only_name="winpty-0.4.0-cygwin-2.5.2-ia32"
 
 # Specific file extension
 babun_docker_winpty_ext=".tar.gz"
@@ -38,14 +38,14 @@ if [[ ! -f $babun_docker_winpty_filename ]] ; then
    mkdir -p $babun_docker_winpty_dir
    cd $babun_docker_winpty_dir
    # Download winpty
-   wget $babun_docker_winpty_url -O $babun_docker_winpty_filename
+   wget $babun_docker_winpty_url   -O $babun_docker_winpty_filename
    # Untar the downloaded file
    tar xf $babun_docker_winpty_filename
    # Move the tar contents to the current directory
    mv $babun_docker_winpty_only_name/bin/* ./
    # Remove untar-ed directory
    rm -rf $babun_docker_winpty_only_name
-   # Make console executable
+   # Make winpty executable
    chmod 777 $babun_docker_winpty_dir/*
 fi
 export PATH="$PATH:$babun_docker_winpty_dir"
