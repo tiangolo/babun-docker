@@ -47,6 +47,8 @@ if [[ ! -f $babun_docker_winpty_filename ]] ; then
    rm -rf $babun_docker_winpty_only_name
    # Make winpty executable
    chmod 777 $babun_docker_winpty_dir/*
+   # Ask for update
+   echo "$babun_docker_feedback to finish the installation please run: babun-docker-update"
 fi
 export PATH="$PATH:$babun_docker_winpty_dir"
 
@@ -56,6 +58,7 @@ export PATH="$PATH:$babun_docker_winpty_dir"
 babun_docker_repo_dir="$HOME/.babun-docker"
 if [[ ! -d $babun_docker_repo_dir ]] ; then
    git clone $babun_docker_repo $babun_docker_repo_dir
+   echo "$babun_docker_feedback to finish the installation please run: babun-docker-update"
 fi
 cd $babun_docker_repo_dir
 source ./*config.sh
