@@ -34,6 +34,11 @@ docker run -d -v $(pwd):/var/www ubuntu ping google.com
 curl -s https://raw.githubusercontent.com/tiangolo/babun-docker/master/setup.sh | source /dev/stdin
 ```
 
+* To be able to use **babun-docker** right away without having to close and open Babun run the update:
+```
+babun-docker-update
+```
+
 * From Babun, use Docker as you would normally, for example: `docker ps`. 
 
 It will take care of configuring the virtual machine, turning it on, sharing volumes, allowing non-tty commands, etc. Whenever it does something for you (automatically) you will see an output like: `-- babun-docker: doing something`.
