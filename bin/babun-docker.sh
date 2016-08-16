@@ -16,7 +16,7 @@ function docker {
  babun_docker_run_again=0
  "$docker_bin" $@ 2>&1 | while read -r line; do
    echo $line
-    if [[ $line == "cannot enable tty mode on non tty input" || $line == "the input device is not a TTY.  If you are using mintty, try prefixing the command with 'winpty'" ]] ; then
+    if [[ $line == "cannot enable tty mode on non tty input" || $line == "the input device is not a TTY.  If you are using mintty, try prefixing the command with 'winpty'" || $line == "Error: Cannot perform an interactive login from a non TTY device" ]] ; then
       babun_docker_use_winpty=1
       echo "export babun_docker_use_winpty=1" >> $babun_docker_env_vars_file
     elif [[ $line == *"ConnectEx tcp"* || $line == *"connectex"* || $line == *"//./pipe/docker_engine:"* ]] ; then
