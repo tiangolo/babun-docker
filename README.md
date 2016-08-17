@@ -82,6 +82,9 @@ docker-machine stop $babun_docker_machine_name
 
 ## What's new
 
+#### 2016-08-17:
+* Fix for the command `docker login`, see PR [24](https://github.com/tiangolo/babun-docker/pull/24) by [jpraet](https://github.com/jpraet).
+
 #### 2016-07-05:
 * Make `winpty` download file explicit, see PR [23](https://github.com/tiangolo/babun-docker/pull/23) by [murrayju](https://github.com/murrayju).
 * Use the latest version of Winpty (0.4.0).
