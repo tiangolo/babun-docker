@@ -10,17 +10,25 @@ This program installs [winpty](https://github.com/rprichard/winpty), sets the en
 
 This allows running commands that "enter" in the container, as for example those that use `-it` and end in `bash`:
 
-```docker run -it -v $(pwd):/var/www debian bash```
+```bash
+docker run -it -v $(pwd):/var/www debian bash
+```
 
 It also checks if the default docker-machine (the Virtual Machine) is running, if not, it tries to start it and set the environment to use it.
 
 And it also sets up shared folders in VirtualBox for each drive in your Windows (although you can configure which drives to use if you want) and mounts them inside the virtual machine (docker-machine), to allow using volumes with Docker (from any drive in your Windows, which is even more than what comes by default with the Docker Toolbox) to allow using commands like:
 
-```
+```bash
 docker run -d -v $(pwd):/var/www ubuntu ping google.com
 ```
 
-**Note**: After installing **babun-docker** (this program), you don't have to "use" another program. You can keep using the ```docker``` commands as normal.
+The shared folders (drives) inside the docker-machine (VirtualBox virtual machine) are mounted in two different directories to make it compatible with `docker` and `docker-compose`, so you can use normal relative volumes with `docker-compose`. You only have to make sure you run a normal `docker` command first to start and set up everything. For example:
+
+```bash
+docker ps
+```
+
+**Note**: After installing **babun-docker** (this program), you don't have to "use" another program. You can keep using the ```docker``` commands as normal. And after running a first `docker` command, you can use `docker-compose` as you would normally too.
 
 ## Installation
 
@@ -39,7 +47,7 @@ curl -s https://raw.githubusercontent.com/tiangolo/babun-docker/master/setup.sh 
 babun-docker-update
 ```
 
-* From Babun, use Docker as you would normally, for example: `docker ps`. 
+* From Babun, use Docker as you would normally, for example: `docker ps`.
 
 It will take care of configuring the virtual machine, turning it on, sharing volumes, allowing non-tty commands, etc. Whenever it does something for you (automatically) you will see an output like: `-- babun-docker: doing something`.
 
@@ -81,6 +89,38 @@ docker-machine stop $babun_docker_machine_name
 ----
 
 ## What's new
+
+#### 2016-11-09:
+Now the shared folders are mounted in two directories inside the VirtualBox virtual machine to make it compatible with `docker-compose`.
+
+You can start and set up **babun-docker** and all the shared folders with any `docker` command, as:
+
+```bash
+docker ps
+```
+
+And have a `docker-compose.yml` file with:
+
+```yml
+version: '2'
+services:
+  server:
+    build: ./server
+    volumes:
+      - ./server/app:/app
+    ports:
+      - 8081:80
+```
+
+...note the relative mounted volume in `./server/app:/app`.
+
+And then bring up your stack with:
+
+```bash
+docker-compose up -d
+```
+
+and it will work (because the shared folder paths that `docker-compose` uses are also mounted in the virtual machine).
 
 #### 2016-08-17:
 * Fix for the command `docker login`, see PR [24](https://github.com/tiangolo/babun-docker/pull/24) by [jpraet](https://github.com/jpraet).

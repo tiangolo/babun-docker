@@ -26,9 +26,11 @@ function docker {
         if [[ -f "$babun_docker_virtualbox_bin" ]] ; then
           for drive in $(echo $babun_docker_volumes | tr '\n' ' ') ; do
             windows_drive=$(cygpath -d /cygdrive/$drive)
+            windows_driveb=$(cygpath -d /$drive)
             if [[ -z $("$babun_docker_virtualbox_bin" showvminfo $babun_docker_machine_name | grep "Name: '$drive'") ]] ; then
               echo "$babun_docker_feedback Setting VirtualBox shared folder for drive $drive"
               "$babun_docker_virtualbox_bin" sharedfolder add $babun_docker_machine_name --name $drive --hostpath $windows_drive --automount
+              "$babun_docker_virtualbox_bin" sharedfolder add $babun_docker_machine_name --name $drive --hostpath $windows_driveb --automount
             else
               echo "$babun_docker_feedback VirtualBox shared folder for drive $drive was already set"
             fi
@@ -45,9 +47,10 @@ function docker {
         for drive in $(ls /cygdrive); do
           echo "$babun_docker_feedback Volumes, creating directory for drive: $drive"
           docker-machine ssh $babun_docker_machine_name "sudo mkdir -p /cygdrive/$drive/"
+          docker-machine ssh $babun_docker_machine_name "sudo mkdir -p /$drive/"
           echo "$babun_docker_feedback Volumes, mounting drive: $drive"
-          #docker-machine ssh $babun_docker_machine_name "sudo mount -t vboxsf $drive /cygdrive/$drive/"
           docker-machine ssh $babun_docker_machine_name 'sudo mount -t vboxsf -o "defaults,uid=`id -u docker`,gid=`id -g docker`,iocharset=utf8,rw"' "$drive /cygdrive/$drive/"
+          docker-machine ssh $babun_docker_machine_name 'sudo mount -t vboxsf -o "defaults,uid=`id -u docker`,gid=`id -g docker`,iocharset=utf8,rw"' "$drive /$drive/"
         done
         IFS=''
       fi;
