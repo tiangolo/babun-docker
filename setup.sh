@@ -50,7 +50,7 @@ if [[ ! -f $babun_docker_winpty_filename ]] ; then
    # Ask for update
    echo "$babun_docker_feedback to finish the installation please run: babun-docker-update"
 fi
-export PATH="$PATH:$babun_docker_winpty_dir"
+export PATH="$babun_docker_winpty_dir:$PATH"
 
 
 # Set up babun-docker
