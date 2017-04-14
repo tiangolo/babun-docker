@@ -263,3 +263,9 @@ source ~/.babun-docker/*config.sh
 echo "babun_docker_virtualbox_bin='$(cygpath -u 'C:\Program Files\Oracle\VirtualBox\VBoxManage')'" >> ~/.babun-docker/custom-config.sh
 source ~/.babun-docker/*config.sh
 ```
+
+---
+
+## License
+
+This project is licensed under the terms of the MIT license.
