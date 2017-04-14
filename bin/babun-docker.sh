@@ -66,7 +66,7 @@ function docker {
  # (Fix for Bash) check if a variables file was created and source it
  if [[ -f $babun_docker_env_vars_file ]] ; then
    source $babun_docker_env_vars_file
-   rm $babun_docker_env_vars_file
+   rm -f $babun_docker_env_vars_file
  fi
 
  if [[ $babun_docker_use_winpty == 1 ]] ; then
