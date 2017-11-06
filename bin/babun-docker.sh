@@ -63,7 +63,8 @@ function docker {
       echo "export babun_docker_run_again=1" >> $babun_docker_env_vars_file
     fi;
  done
- ret=${PIPESTATUS[0]}
+ # it seems that babun bash is using same variable as zsh
+ ret=${pipestatus[1]}
  # (Fix for Bash) check if a variables file was created and source it
  if [[ -f $babun_docker_env_vars_file ]] ; then
    source $babun_docker_env_vars_file
