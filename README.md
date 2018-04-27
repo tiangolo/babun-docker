@@ -94,6 +94,8 @@ docker-machine stop $babun_docker_machine_name
 
 Updates (`winpty`) and bug fixes. See PR [34](https://github.com/tiangolo/babun-docker/pull/34) by [murray02](https://github.com/murray02).
 
+The return code is now preserved. See PR [31](https://github.com/tiangolo/babun-docker/pull/31) by [ptisserand](https://github.com/ptisserand).
+
 #### 2016-11-09:
 Now the shared folders are mounted in two directories inside the VirtualBox virtual machine to make it compatible with `docker-compose`.
 
