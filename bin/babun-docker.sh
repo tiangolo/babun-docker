@@ -63,6 +63,8 @@ function docker {
       echo "export babun_docker_run_again=1" >> $babun_docker_env_vars_file
     fi;
  done
+ # it seems that babun bash is using same variable as zsh
+ ret=${pipestatus[1]}
  # (Fix for Bash) check if a variables file was created and source it
  if [[ -f $babun_docker_env_vars_file ]] ; then
    source $babun_docker_env_vars_file
@@ -73,10 +75,13 @@ function docker {
    # Run commands with winpty
    echo "$babun_docker_feedback Using winpty"
    winpty $docker_bin $@
+   ret=$?
  elif [[ $babun_docker_run_again == 1 ]] ; then
    # Run commands again after setup
    echo "$babun_docker_feedback Running command again"
    docker $@
+   ret=$?
  fi
  IFS=$babun_docker_old_IFS
+ return ${ret}
 }
