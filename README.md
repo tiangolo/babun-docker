@@ -149,7 +149,7 @@ and it will work (because the shared folder paths that `docker-compose` uses are
 * You can configure the VirtualBox installation path with the variable `babun_docker_virtualbox_bin`. Read more in the **Configurations** section below.
 
 #### 2016-04-14:
-* You can define which specific Windows drives to mount with the variable `babun_docker_volumes` (by default **babun-docker** tries to mounth them all). Read more in the **Configurations** section below.
+* You can define which specific Windows drives to mount with the variable `babun_docker_volumes` (by default **babun-docker** tries to mount them all). Read more in the **Configurations** section below.
 
 * You can use a separate file in `~/.babun-docker/custom-config.sh` for custom configurations. Read more in the **Configurations** section below.
 
