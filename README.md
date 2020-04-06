@@ -92,6 +92,7 @@ docker-machine stop $babun_docker_machine_name
 
 ### Latest changes
 
+* Fix new line CR (Windows style) in setup. PR [#37](https://github.com/tiangolo/babun-docker/pull/37) by [@marcelotaube](https://github.com/marcelotaube).
 * Fix typo in docs. PR [#38](https://github.com/tiangolo/babun-docker/pull/38) by [@Jason-Cooke](https://github.com/Jason-Cooke).
 
 #### 2018-04-27:
