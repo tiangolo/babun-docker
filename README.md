@@ -88,7 +88,11 @@ docker-machine stop $babun_docker_machine_name
 
 ----
 
-## What's new
+## Release Notes
+
+### Latest changes
+
+* Fix typo in docs. PR [#38](https://github.com/tiangolo/babun-docker/pull/38) by [@Jason-Cooke](https://github.com/Jason-Cooke).
 
 #### 2018-04-27:
 
