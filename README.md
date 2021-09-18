@@ -1,5 +1,9 @@
 # babun-docker
 
+## 🚨 DEPRECATED 🚨
+
+If you are developing in Windows you will have a much better time using Docker for Windows and developing with WSL (Windows Subsystem for Linux) than using Babun and connecting it to Docker Toolbox. You probably shouldn't use this tool. It's here only for posterity.
+
 ## Description
 
 Program / fix to allow using [Docker Toolbox](https://www.docker.com/toolbox) from [Babun](http://babun.github.io/) or Cygwin in Windows.
